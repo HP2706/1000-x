@@ -11,15 +11,15 @@ def simulate_one_scenario(n_people, n_industries, rate_of_improvement, learning_
     return improvements
 
 def main():
-    st.title('Industry Improvement Simulation')
+    st.title('can you become 1000x')
 
     # Sidebar for parameters
     n_people = st.sidebar.number_input('Number of People', min_value=1000, max_value=20000, value=10000)
     n_industries = st.sidebar.number_input('Number of Industries', min_value=10, max_value=200, value=100)
-    max_improvement = st.sidebar.number_input('Maximum Improvement', min_value=1.0, max_value=3.0, value=1.5)
-    max_learning_cap = st.sidebar.number_input('Learning Cap', min_value=1.0, max_value=3.0, value=2.0)
-    max_knowledge_decay = st.sidebar.number_input('Knowledge Decay, smaller is "larger" ', min_value=0.5, max_value=1.0, value=0.9)
-    max_years_worked = st.sidebar.number_input('Maximum Human Years Worked', min_value=20, max_value=80, value=60)
+    max_improvement = st.sidebar.number_input('Maximum annual Improvement', min_value=1.0, max_value=5.0, value=1.5)
+    max_learning_cap = st.sidebar.number_input('Learning Cap(absolute)', min_value=1.0, max_value=10.0, value=2.0)
+    max_knowledge_decay = st.sidebar.number_input('Annual Knowledge Decay(smaller is "larger")', min_value=0.0, max_value=1.0, value=0.9)
+    max_years_worked = st.sidebar.number_input('Maximum Years Worked', min_value=20, max_value=80, value=60)
 
     # Simulate button
     if st.button('Simulate'):
@@ -49,6 +49,12 @@ def main():
         # Plot for Absolute Improvement
         st.header('Absolute Improvement')
         st.line_chart(absolute_sorted)
+
+        mean_improvement = np.mean(out)
+        st.header('improvement normalized by mean')
+        normalized = out / mean_improvement
+        normalized_sorted = np.sort(normalized)
+        st.line_chart(normalized_sorted)
         
 if __name__ == '__main__':
     main()
