@@ -11,7 +11,8 @@ def simulate_one_scenario(n_people, n_industries, rate_of_improvement, learning_
     return improvements
 
 def main():
-    st.title('can you become 1000x')
+    st.title('Can you become 1000x')
+    st.markdown('[Inspired by a blog post i wrote, on the distribution in capabilities of people](https://majestic-burrito-31e.notion.site/how-you-become-1000x-f646edf647b34c47b0f66167c10bc5eb?pvs=4)')
 
     # Sidebar for parameters
     n_people = st.sidebar.number_input('Number of People', min_value=1000, max_value=20000, value=10000)
@@ -52,11 +53,11 @@ def main():
 
         # get top 10% "ownership"
         top_10_percent = np.sum(absolute_sorted[int(n_people * 0.1):])
-        st.header('Top 10% Improvement as a percentage of total improvement')
+        st.header('Top 10% share of total improvement')
         st.write(top_10_percent/np.sum(absolute_sorted))
 
         mean_improvement = np.mean(out)
-        st.header('improvement normalized by mean')
+        st.header('Improvement / mean improvement')
         normalized = out / mean_improvement
         normalized_sorted = np.sort(normalized)
         st.line_chart(normalized_sorted)
