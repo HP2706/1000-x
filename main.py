@@ -50,6 +50,11 @@ def main():
         st.header('Absolute Improvement')
         st.line_chart(absolute_sorted)
 
+        # get top 10% "ownership"
+        top_10_percent = np.sum(absolute_sorted[int(n_people * 0.1):])
+        st.header('Top 10% Improvement as a percentage of total improvement')
+        st.write(top_10_percent/np.sum(absolute_sorted))
+
         mean_improvement = np.mean(out)
         st.header('improvement normalized by mean')
         normalized = out / mean_improvement
